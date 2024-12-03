@@ -12,7 +12,7 @@ console.log(app.get('view engine'))
 // es ko karney key do tareekey hen sab sey pehly to dekho bhai jo neechey kaam  kia hey vesy bhi ho sakta hey varna ye vala
 // ye Vala Static File start
 // app.use(express.static("public"))
-// ye kia os key badd jha dena hey odher serif ka name de do chal jay ga 
+// ye kia os key badd jha dena hey odher serif ka name de do chal jay ga shi sey
 // ye Vala Static File end
 
 // ye dekhney key liye key jes file ka app path dey hey ho vo path target ho rha hey ya nehi
