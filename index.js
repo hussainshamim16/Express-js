@@ -37,7 +37,8 @@ app.use(express.static(relative))
 // ab agger mujhey about per serif about kei html css js files bhijni hen to mujhey ye karna hey 
 app.get('/about',(req,res)=>{
   // jab hamey koi file send karvani ho gi html css js kei to hamey send kei jagah send file likhna pery ga 
-  res.sendFile(path.resolve(__dirname+'/public/about.html'))
+  // res.sendFile(path.resolve(__dirname+'/public/about.html'))
+  res.render('about')
 })
 
 
@@ -58,8 +59,8 @@ app.get('/download',(req,res)=>{
 // takey hamari express js ko pata chal jay gey ham ejs use kar rhey hen 
 // ager hamey test karna hey to ham likhey gey console.log(app.get("view engin"))
 
-// res.render ye server side rendering key liye use hota hey kesi spacific tempelate jesey ejs,jpg,png ko screen per render karvaney key liye
 app.get('/',(req,res)=>{
+  // res.render ye server side rendering key liye use hota hey kesi spacific tempelate jesey ejs,jpg,png ko screen per render karvaney key liye
   res.render('index')
 })
 
