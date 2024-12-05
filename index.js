@@ -65,12 +65,12 @@ app.get('/',(req,res)=>{
   // ab hamey yhan aike object den hey key or value 
   // jo key ham den gey osey ham apney ejs kei file mey kesei bhi tag key ander <%= key%> es formate mey dey den gey 
   res.render('index',{
-    // yhan app aike key bana len or value khd ba khod print ho jay gei 
+    // (spacific id 1) ab agger hamey component vala kaam karna hey jesa key aike code agger bar bar repeat ho rha hey to ham os ka aike suprte ejs kei file bana len gey or osey
+      // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
+    // yhan app aike OBJECT key bana len or value khd ba khod print ho jay gei 
     heading:'This File is Updated',
 
 
-// (spacific id 1) ab agger hamey component vala kaam karna hey jesa key aike code agger bar bar repeat ho rha hey to ham os ka aike suprte ejs kei file bana len gey or osey
-  // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
 
 
 })
@@ -79,6 +79,16 @@ app.get('/',(req,res)=>{
 
 // Template Engine End
 
+// express roter start  
+// ap sab se pehly route key liye alag folder banay gey or os key ander indexedDB.js kei file den  gey 
+// ab ham os file mey ja ker route ko initializ e karen gey 
+// const roter = require('express').Router();
+// os key baad ham router ko export aren gey 
+// module.exports = router
+// bilkol ham jesy app per use kartey hen http methods jesy app.get vesey hei ham router.get karen gey simple baaqi sara vesy hei ho ga 
+
+
+// express roter end
 
 
 
