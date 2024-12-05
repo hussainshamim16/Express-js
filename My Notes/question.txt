@@ -1,0 +1,11 @@
+
+
+
+
+
+response key ye method samjhna hey ???
+
+res.send()
+res.resolve()
+res.render()
+res.download()

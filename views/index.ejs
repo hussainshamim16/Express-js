@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
 </head>
+
 <body>
-  <h1>Index Static File !</h1>
-  <a href="/download">Download</a>
+  <h1>
+    <!-- vhan sey heading kei value aay gei or yhan vo vali heading or ye vali heading kei value braber ho jay gei -->
+    <%= heading %>
+  </h1>
+  <!-- (spacific id 1)  ham yha per component ka use karen gey jo key meny router mey baat kei thei  -->
+  <!-- yha per jo (-) laga hua hey vo es baat ko represent kar rha hey key ye tag jo hamnye diya hey vo aike component hy   -->
+  <%- include('../partials/nav.ejs') %>
+
+    <a href="/download">Download</a>
 </body>
+
 </html>

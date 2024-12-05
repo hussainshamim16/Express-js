@@ -9,13 +9,14 @@ app.set("view engine","ejs")
 console.log(app.get('view engine'))
 
 // >> static files Start 
+
 // es ko karney key do tareekey hen sab sey pehly to dekho bhai jo neechey kaam  kia hey vesy bhi ho sakta hey varna ye vala
 // ye Vala Static File start
 // app.use(express.static("public"))
 // ye kia os key badd jha dena hey odher serif ka name de do chal jay ga shi sey
 // ye Vala Static File end
 
-// ye dekhney key liye key jes file ka app path dey hey ho vo path target ho rha hey ya nehi
+// ye dekhney key liye key jes file ka app path dey rhey  hey ho vo path target ho rha hey ya nehi
 // console.log(__dirname,"../public")
 
 
@@ -34,7 +35,7 @@ app.use(express.static(relative))
 // hello world End
 
 
-// ab agger mujhey about per serif about kei html css js files bhijni hen to mujhey ye karna hey 
+// ab agger mujhey about per serif about kei html css js kei static files bhijni hen to mujhey ye karna hey 
 app.get('/about',(req,res)=>{
   // jab hamey koi file send karvani ho gi html css js kei to hamey send kei jagah send file likhna pery ga 
   // res.sendFile(path.resolve(__dirname+'/public/about.html'))
@@ -61,7 +62,19 @@ app.get('/download',(req,res)=>{
 
 app.get('/',(req,res)=>{
   // res.render ye server side rendering key liye use hota hey kesi spacific tempelate jesey ejs,jpg,png ko screen per render karvaney key liye
-  res.render('index')
+  // ab hamey yhan aike object den hey key or value 
+  // jo key ham den gey osey ham apney ejs kei file mey kesei bhi tag key ander <%= key%> es formate mey dey den gey 
+  res.render('index',{
+    // yhan app aike key bana len or value khd ba khod print ho jay gei 
+    heading:'This File is Updated',
+
+
+// (spacific id 1) ab agger hamey component vala kaam karna hey jesa key aike code agger bar bar repeat ho rha hey to ham os ka aike suprte ejs kei file bana len gey or osey
+  // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
+
+
+})
+
 })
 
 // Template Engine End
