@@ -7,15 +7,30 @@
 </head>
 
 <body>
-  <h1>
-    <!-- vhan sey heading kei value aay gei or yhan vo vali heading or ye vali heading kei value braber ho jay gei -->
-    <%= heading %>
-  </h1>
-  <!-- (spacific id 1)  ham yha per component ka use karen gey jo key meny router mey baat kei thei  -->
-  <!-- yha per jo (-) laga hua hey vo es baat ko represent kar rha hey key ye tag jo hamnye diya hey vo aike component hy   -->
-  <%- include('../partials/nav.ejs') %>
-
-    <a href="/download">Download</a>
+  <form action="/submit">
+    <h1>hello Bloger</h1> <br>
+    <input type="text" placeholder="Enter Title" id="blogTitle"> <br>
+    <textarea name="" id="blogContent" cols="30" rows="6" placeholder="Enter Content"></textarea> <br>
+    <input type="text" placeholder="Author Name" id="blogAuthor"> <br>
+    <input type="file" name="" id="blogFile"> <br>
+    <button type="submit">Add Blog</button>
+    <div id="render"></div>
+  </form>
 </body>
+<script>
+let  render = document.getElementById("render")
+const    Title = document.getElementById("blogTitle")
+const    Content = document.getElementById("blogContent")
+const    Author = document.getElementById("blogAuthor")
+    // res.send("hello")
+  const blogObject = {
+    // hello
+    Title :Title.value,
+    Content :Content.value,
+    Author :Author.value,
+    // FileImage: document.getElementById("blogFile").file,
+  }
+  console.log(blogObject)
+</script>
 
 </html>

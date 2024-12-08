@@ -5,7 +5,7 @@ const app = express()
 const port = 4000
 
 // view engin 
-app.set("view engine","ejs")
+app.set("view engine", "ejs")
 console.log(app.get('view engine'))
 
 // >> static files Start 
@@ -21,7 +21,7 @@ console.log(app.get('view engine'))
 
 
 // get path 
-const relative = path.join(__dirname,"./public"); 
+const relative = path.join(__dirname, "./public");
 app.use(express.static(relative))
 
 // >> static files End 
@@ -36,7 +36,7 @@ app.use(express.static(relative))
 
 
 // ab agger mujhey about per serif about kei html css js kei static files bhijni hen to mujhey ye karna hey 
-app.get('/about',(req,res)=>{
+app.get('/about', (req, res) => {
   // jab hamey koi file send karvani ho gi html css js kei to hamey send kei jagah send file likhna pery ga 
   // res.sendFile(path.resolve(__dirname+'/public/about.html'))
   res.render('about')
@@ -44,9 +44,9 @@ app.get('/about',(req,res)=>{
 
 
 // dowload Functionality start
-app.get('/download',(req,res)=>{
+app.get('/download', (req, res) => {
   // jab hamey koi file download karvani hogi to ham res.download likhen gey or file ka path dey dey gey 
-  res.download(path.resolve(__dirname+'/public/image.png'))
+  res.download(path.resolve(__dirname + '/public/image.png'))
 })
 // dowload Functionality end
 
@@ -60,21 +60,30 @@ app.get('/download',(req,res)=>{
 // takey hamari express js ko pata chal jay gey ham ejs use kar rhey hen 
 // ager hamey test karna hey to ham likhey gey console.log(app.get("view engin"))
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   // res.render ye server side rendering key liye use hota hey kesi spacific tempelate jesey ejs,jpg,png ko screen per render karvaney key liye
   // ab hamey yhan aike object den hey key or value 
   // jo key ham den gey osey ham apney ejs kei file mey kesei bhi tag key ander <%= key%> es formate mey dey den gey 
-  res.render('index',{
+  res.render('index', {
     // (spacific id 1) ab agger hamey component vala kaam karna hey jesa key aike code agger bar bar repeat ho rha hey to ham os ka aike suprte ejs kei file bana len gey or osey
-      // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
+    // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
     // yhan app aike OBJECT key bana len or value khd ba khod print ho jay gei 
-    heading:'This File is Updated',
+    heading: 'This File is Updated',
 
 
 
+
+  })
 
 })
 
+// blogTitle 
+// blogContent
+// blogAuthor
+// blogFile
+
+app.get('/submit', (req, res) => {
+res.render('index')
 })
 
 // Template Engine End
