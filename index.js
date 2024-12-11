@@ -2,7 +2,7 @@ const express = require('express')
 // express mey path es tarha sey import kartey hen 
 const path = require('path')
 const app = express()
-const port = 4000
+const port = 5000
 
 // view engin 
 app.set("view engine", "ejs")
