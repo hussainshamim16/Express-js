@@ -7,13 +7,33 @@
 </head>
 
 <body>
-  <div class="px-5 py-5">
+  <div class="todo px-5 py-5">
     <form action="/submit">
       <h1>Add Todo</h1> <br>
       <input type="text" placeholder="Enter Title" id="blogTitle"> <br>
       <button type="submit btn" class="btn bg-primary py-1 rounded-5 my-1 text-white">Add Todo</button>
       <div id="render"></div>
     </form>
+  </div>
+  <div class="reslt px-5 rounded py-3">
+    <ul class="px-5">
+      <li  class="bg-primary text-white mb-2 px-2 rounded d-flex align-items-center justify-content-between py-1 rounded-5 font ">
+        red
+   
+        <div class="buttons">
+          <a href="#" class="text-decoretion-none">
+            <button class="bg-warning px-3 rounded-5">
+              Edit
+            </button>
+          </a>
+          <a href="#">
+            <button class="bg-warning px-3 rounded-5">
+              Delete
+            </button>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </body>
 </html>
