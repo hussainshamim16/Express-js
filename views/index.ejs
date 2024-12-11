@@ -8,18 +8,19 @@
 
 <body>
   <div class="todo px-5 py-5">
-    <form action="/submit">
+    <form action="JavaScript:void(0)">
       <h1>Add Todo</h1> <br>
       <input type="text" placeholder="Enter Title" id="blogTitle"> <br>
-      <button type="submit btn" class="btn bg-primary py-1 rounded-5 my-1 text-white">Add Todo</button>
+      <button type="submit btn" class="btn bg-primary py-1 rounded-5 my-1 text-white" onclick="red(this)">Add
+        Todo</button>
       <div id="render"></div>
     </form>
   </div>
   <div class="reslt px-5 rounded py-3">
     <ul class="px-5">
-      <li  class="bg-primary text-white mb-2 px-2 rounded d-flex align-items-center justify-content-between py-1 rounded-5 font ">
+      <li
+        class="bg-primary text-white mb-2 px-2 rounded d-flex align-items-center justify-content-between py-1 rounded-5 font ">
         red
-   
         <div class="buttons">
           <a href="#" class="text-decoretion-none">
             <button class="bg-warning px-3 rounded-5">
@@ -36,4 +37,10 @@
     </ul>
   </div>
 </body>
+<script>
+  const red = (e) => {
+    window.open('/submit')
+  }
+</script>
+
 </html>

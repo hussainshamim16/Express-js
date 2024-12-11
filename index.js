@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
 // blogFile
 
 app.get('/submit', (req, res) => {
-res.render('index')
+res.send('rehmat')
 })
 
 // Template Engine End
