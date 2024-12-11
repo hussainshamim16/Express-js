@@ -8,6 +8,16 @@ const port = 5000
 app.set("view engine", "ejs")
 console.log(app.get('view engine'))
 
+// todo adding middle weare
+function Custom_Middlewear(req,res,next){
+console.log("running Middleweare")
+next()
+}
+
+app.use(Custom_Middlewear);
+
+// todo adding middle weare end
+
 // >> static files Start 
 
 // es ko karney key do tareekey hen sab sey pehly to dekho bhai jo neechey kaam  kia hey vesy bhi ho sakta hey varna ye vala
@@ -21,8 +31,8 @@ console.log(app.get('view engine'))
 
 
 // get path 
-const relative = path.join(__dirname, "./public");
-app.use(express.static(relative))
+// const relative = path.join(__dirname, "./public");
+// app.use(express.static(relative))
 
 // >> static files End 
 
@@ -36,18 +46,18 @@ app.use(express.static(relative))
 
 
 // ab agger mujhey about per serif about kei html css js kei static files bhijni hen to mujhey ye karna hey 
-app.get('/about', (req, res) => {
-  // jab hamey koi file send karvani ho gi html css js kei to hamey send kei jagah send file likhna pery ga 
-  // res.sendFile(path.resolve(__dirname+'/public/about.html'))
-  res.render('about')
-})
+// app.get('/about', (req, res) => {
+//   // jab hamey koi file send karvani ho gi html css js kei to hamey send kei jagah send file likhna pery ga 
+//   // res.sendFile(path.resolve(__dirname+'/public/about.html'))
+//   res.render('about')
+// })
 
 
 // dowload Functionality start
-app.get('/download', (req, res) => {
-  // jab hamey koi file download karvani hogi to ham res.download likhen gey or file ka path dey dey gey 
-  res.download(path.resolve(__dirname + '/public/image.png'))
-})
+// app.get('/download', (req, res) => {
+//   // jab hamey koi file download karvani hogi to ham res.download likhen gey or file ka path dey dey gey 
+//   res.download(path.resolve(__dirname + '/public/image.png'))
+// })
 // dowload Functionality end
 
 
@@ -60,31 +70,31 @@ app.get('/download', (req, res) => {
 // takey hamari express js ko pata chal jay gey ham ejs use kar rhey hen 
 // ager hamey test karna hey to ham likhey gey console.log(app.get("view engin"))
 
-app.get('/', (req, res) => {
-  // res.render ye server side rendering key liye use hota hey kesi spacific tempelate jesey ejs,jpg,png ko screen per render karvaney key liye
-  // ab hamey yhan aike object den hey key or value 
-  // jo key ham den gey osey ham apney ejs kei file mey kesei bhi tag key ander <%= key%> es formate mey dey den gey 
-  res.render('index', {
-    // (spacific id 1) ab agger hamey component vala kaam karna hey jesa key aike code agger bar bar repeat ho rha hey to ham os ka aike suprte ejs kei file bana len gey or osey
-    // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
-    // yhan app aike OBJECT key bana len or value khd ba khod print ho jay gei 
-    heading: 'This File is Updated',
+// app.get('/', (req, res) => {
+//   // res.render ye server side rendering key liye use hota hey kesi spacific tempelate jesey ejs,jpg,png ko screen per render karvaney key liye
+//   // ab hamey yhan aike object den hey key or value 
+//   // jo key ham den gey osey ham apney ejs kei file mey kesei bhi tag key ander <%= key%> es formate mey dey den gey 
+//   res.render('index', {
+//     // (spacific id 1) ab agger hamey component vala kaam karna hey jesa key aike code agger bar bar repeat ho rha hey to ham os ka aike suprte ejs kei file bana len gey or osey
+//     // yhan call kerva len gey ham ab index.ejs mey ja ker ye kaam dekhen gey 
+//     // yhan app aike OBJECT key bana len or value khd ba khod print ho jay gei 
+//     heading: 'This File is Updated',
 
 
 
 
-  })
+//   })
 
-})
+// })
 
 // blogTitle 
 // blogContent
 // blogAuthor
 // blogFile
 
-app.get('/submit', (req, res) => {
-res.send('rehmat')
-})
+// app.get('/submit', (req, res) => {
+// res.send('rehmat')
+// })
 
 // Template Engine End
 
@@ -111,6 +121,56 @@ res.send('rehmat')
 //   res.send("user is  post")
 // })
 
+// ham abhi aike todo app bana rhey hen 
+const todos = [
+  {
+    id: 1,
+    Title: 'python',
+    inUsing: false,
+  },
+  {
+    id: 2,
+    Title: 'javascript',
+    inUsing: true,
+  }
+]
+app.get('/',(req,res)=>{
+  res.send("hello")
+})
+// console.log(todos[1].id)
+
+// get all todos
+app.get('/todos',(req,res)=>{
+  res.json(todos)
+})
+
+// get single todo 
+app.get('/todos/:id',(req,res)=>{
+  // (req) ka matlab jo request aai hey or perams ye dekhney key liye hey key kia request kei gai hey or id object sey nikaalney key liye 
+// console.log(req.params.id)
+// apney todo ko check karney key liye ham ye condision lagay gey 
+const todoCheck = todos.filter((todo)=> todo.id == req.params.id);
+// console.log(todoCheck)
+res.json(todoCheck)
+})
+
+// add todo
+app.post('/todos',(req,res)=>{
+  // todo add karney sey pehly meny aike middle wear fnc banaya hey jo post karney mey maddad dekha hey 
+  // line number 
+  // default mey ham json empty rakhen gey 
+  // abhi hamey aike pekage install karna hey body parser
+  res.json([])
+})
+// put ka matlab edit 
+app.put('/todos/:id',(req,res)=>{
+  res.json([])
+})
+
+// delete
+app.post('/todos/:id',(req,res)=>{
+  res.json([])
+})
 
 // yhan sey ye listning kar rha hey 
 app.listen(port, () => {
