@@ -3,20 +3,23 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const port = 5000
-
 const bodyParser = require('body-parser');
+// uuid matlab key hamarey todo ko aike alag sey aike id milley gei 
+// const uid = require("uuid")
 
 // view engin 
 app.set("view engine", "ejs")
 console.log(app.get('view engine'))
 
 // todo adding middle weare
-function Custom_Middlewear(req,res,next){
-console.log("running Middleweare")
-next()
-}
+// function Custom_Middlewear(req,res,next){
+// console.log("running Middleweare")
+// next()
+// }
 
-app.use(Custom_Middlewear);
+
+// perams ko ko ham json mey use karney key liye ye code likhen  gey 
+app.use(bodyParser.json());
 
 // todo adding middle weare end
 
@@ -124,7 +127,7 @@ app.use(Custom_Middlewear);
 // })
 
 // ham abhi aike todo app bana rhey hen 
-const todos = [
+let todos = [
   {
     id: 1,
     Title: 'python',
@@ -134,49 +137,66 @@ const todos = [
     id: 2,
     Title: 'javascript',
     inUsing: true,
+  },
+  {
+    id: 3,
+    Title: 'c#',
+    inUsing: false,
   }
 ]
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   res.send("hello")
 })
 // console.log(todos[1].id)
 
 // get all todos
-app.get('/todos',(req,res)=>{
+app.get('/todos', (req, res) => {
   res.json(todos)
 })
 
 // get single todo 
-app.get('/todos/:id',(req,res)=>{
+app.get('/todos/:id', (req, res) => {
   // (req) ka matlab jo request aai hey or perams ye dekhney key liye hey key kia request kei gai hey or id object sey nikaalney key liye 
-// console.log(req.params.id)
-// apney todo ko check karney key liye ham ye condision lagay gey 
-const todoCheck = todos.filter((todo)=> todo.id == req.params.id);
-// console.log(todoCheck)
-res.json(todoCheck)
+  // console.log(req.params.id)
+  // apney todo ko check karney key liye ham ye condision lagay gey 
+  const todoCheck = todos.filter((todo) => todo.id == req.params.id);
+  // console.log(todoCheck)
+  res.json(todoCheck)
 })
+console.log(new Date())
 
 // add todo
-app.post('/todos',(req,res)=>{
+app.post('/todos', (req, res) => {
   // todo add karney sey pehly meny aike middle wear fnc banaya hey jo post karney mey maddad dekha hey 
   // line number 
   // default mey ham json empty rakhen gey 
   // abhi hamey aike pekage install karna hey body parser
-  res.json([])
+  // ab ham bodyparser use karne gey 
+  let body = req.body
+  console.log("check body pareser get body of todo", body)
+  todos.push({ id: new Date(), ...body })
+  res.json(todos)
 })
 // put ka matlab edit 
-app.put('/todos/:id',(req,res)=>{
-  res.json([])
+app.put('/todos/:id', (req, res) => {
+  let finder = todos.find((todo) => todo.id == req.params.id);
+  if (finder) {
+    finder.Title = req.body.Title
+    finder.inUsing = req.body.inUsing
+    res.json(todos)
+  } else {
+    res.send("no todo found")
+  }
 })
 
 // delete
-app.post('/todos/:id',(req,res)=>{
-  res.json([])
+app.post('/todos/:id', (req, res) => {
+  res.send("i am working fine")
 })
 
 
-app.get('/tod',(req,res)=>{
-  res.sendFile(path.join(__dirname+'/public/all aplication/todo.js'))
+app.get('/tod', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/all aplication/todo.js'))
 })
 
 
