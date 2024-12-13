@@ -190,8 +190,10 @@ app.put('/todos/:id', (req, res) => {
 })
 
 // delete
-app.post('/todos/:id', (req, res) => {
-  res.send("i am working fine")
+app.delete('/todos/:id', (req, res) => {
+ let findinger = todos.findIndex(todo => todo.id == req.params.id)
+ todos.splice(findinger,1)
+  res.json(todos)
 })
 
 
