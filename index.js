@@ -185,7 +185,7 @@ app.put('/todos/:id', (req, res) => {
     finder.inUsing = req.body.inUsing
     res.json(todos)
   } else {
-    res.send("no todo found")
+    res.send("no todos found")
   }
 })
 
