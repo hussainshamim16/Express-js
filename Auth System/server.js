@@ -1,7 +1,7 @@
 const express = require('express');
 const PORT = 5000;
-const mongoose = require('./config/db');
-const authRoutes = require('./routes/auth');
+const mongoose = require('./db');
+const authRoutes = require('./auth');
 
 const app = express();
 
