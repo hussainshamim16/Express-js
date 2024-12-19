@@ -1,0 +1,16 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "<div style=\"text-align: 'center'\">\r <h1>Road Map</h1>\r <img src=\"./public/road map.png\" alt=\"Road Map\">",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}
