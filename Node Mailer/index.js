@@ -1,44 +1,35 @@
-const express = require('express');
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import initializeDatabase from "./src/db/index.js";
+import createTrainer from "./controlers.js";
+import fetchTrainers from "./controlers.js";
+
+dotenv.config();
+
 const app = express();
-const PORT = 3000;
-const nodemailer = require('nodemailer');
 
-// Import the nodemailer package
 
-// Step 1: Create a transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail', // Use Gmail service
-  auth: {
-    user: 'hj422748@gmail.com', // Replace with your Gmail address
-    pass: 'your-email-password', // Replace with your Gmail app password
-  },
-});
-
-// Step 2: Set up email options
-const mailOptions = {
-  from: 'your-email@gmail.com', // Sender's email
-  to: 'recipient-email@example.com', // Recipient's email
-  subject: 'Hello from Nodemailer!', // Email subject
-  text: 'This is a test email sent using Nodemailer. Hope you find it helpful!', // Email body (text)
-};
-
-// Step 3: Send the email
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.error('Error sending email:', error);
-  } else {
-    console.log('Email sent successfully:', info.response);
-  }
-});
-
+app.use(express.json()); 
+app.use(cors()); 
 
 
 app.get("/", (req, res) => {
-    console.log("hello Hussain")
-})
+  res.send("Welcome to the API!");
+});
 
 
+app.use("/api/v1/courses", createTrainer);
+app.use("/api/v1/students", fetchTrainers);
 
-app.listen(PORT, () => {
-    console.log(`port is working at ${PORT}`)
-})
+
+initializeDatabase()
+  .then(() => {
+    const PORT = process.env.PORT || 5000; 
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is live at http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("❌ Failed to connect to the database:", error.message);
+  });
