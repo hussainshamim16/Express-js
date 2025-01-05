@@ -3,13 +3,14 @@ const app = express();
 const dotenv = require('dotenv').config()
 const PORT = process.env.PORT;
 const routes = require("./routes/crud.js");
-const connectDB = require("./config/db.js")
+// const connectDB = require("./config/db.js")
 
+
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(routes)
-app.set("view engine","ejs")
-app.use(express.static("public"))
-
-
+app.set("view engine", "ejs")
 
 
 // connectDB()
@@ -27,6 +28,7 @@ app.use(express.static("public"))
 //     res.render("index")
 
 // })
+
 
 app.listen(PORT, () => {
     console.log("server is one")
