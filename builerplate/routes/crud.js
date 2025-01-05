@@ -1,12 +1,12 @@
-const routes = require("express").Router()
+const CrudRoutes = require("express").Router()
 
 
-routes.get('/crud', (req, res) => {
-    res.send("Iam fom routes")
+CrudRoutes.get('/crud', (req, res) => {
+    res.send("Iam fom CrudRoutes")
 })
-routes.get('/', (req, res) => {
+CrudRoutes.get('/', (req, res) => {
     res.render("index")
 })
 // console.log(route)
 
-module.exports = routes
+module.exports = CrudRoutes
