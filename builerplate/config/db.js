@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     const connectionInstance = await mongoose.connect(
-      `${process.env.MONGO_URI}users`
+      `${process.env.MONGO_URI}hackathon`
     );
     console.log(
       `\n MongoDB connected`
