@@ -20,12 +20,8 @@ const generateRefreshToken = (user) => {
 const registerUser = async (req, res) => {
 
     const { username, email, password, role } = req.body;
-
-    // // Step 1: Create dummy product
-    // const product = await Product.create({ name: "Test Product", price: 100 });
-
-    // Step 2: Create dummy order and associate it with the product
-    // const order = await Order.create({ total: 100, items: [product._id] });
+    const product = await Product.create({ name: "Test Product", price: 100 });
+    const order = await Order.create({ total: 100, items: [product._id] });
 
 
     if (!email) return res.status(400).json({ message: "email required" });
