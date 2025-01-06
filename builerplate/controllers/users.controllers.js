@@ -98,10 +98,17 @@ const authenticateUser = async (req, res, next) => {
     });
 };
 
+// get all user 
+const users = async (req, res) => {
+    const users = await User.find();
+    res.json({ data: users });
+};
+
 module.exports = {
     registerUser,
     loginUser,
     logoutUser,
     refreshToken,
-    authenticateUser
+    authenticateUser,
+    users
 };
