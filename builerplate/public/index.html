@@ -1,27 +1,132 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>staticfilese</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Order</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .order-list {
+      margin-top: 20px;
+    }
+    .order-item {
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-    <h1>staticfilese</h1>
-    
-    # Server configuration
-    PORT="3000"
-    
-    # Database configuration
-    MONGO_URI = "mongodb+srv://hussainshamim:h08DDw01AeP8di7G1234@firstdatabase.ba0zu.mongodb.net/?retryWrites=true&w=majority&appName=FirstDatabase"
-    
-    # JWT configuration
-    ACCESS_JWT_SECRET=dF3shT!94fjYh7nms@#hD
-    REFRESH_JWT_SECRET=mQ9lD8b2Zg1#9Ty$5hshY
-    
-    # clodenary setup
-    CLOUD_NAME='djg3hv9gl' 
-    API_KEY='687321141657826' 
-    API_SECRET="URMmTZhVjDVevQ8PzjSE3uFVYKE"
+
+  <div class="container">
+    <h1>Create Order</h1>
+    <form id="orderForm">
+      <label for="user">User ID</label>
+      <input type="text" id="user" name="user" required>
+
+      <label for="products">Products (comma separated IDs)</label>
+      <input type="text" id="products" name="products" required>
+
+      <button type="submit">Create Order</button>
+    </form>
+
+    <div class="order-list">
+      <h2>Your Orders</h2>
+      <div id="orders"></div>
+    </div>
+  </div>
+  
+  <!-- # Server configuration
+PORT="3000"
+
+# Database configuration
+MONGO_URI = "mongodb+srv://hussainshamim:h08DDw01AeP8di7G1234@firstdatabase.ba0zu.mongodb.net/?retryWrites=true&w=majority&appName=FirstDatabase"
+
+# JWT configuration
+ACCESS_JWT_SECRET=dF3shT!94fjYh7nms@#hD
+REFRESH_JWT_SECRET=mQ9lD8b2Zg1#9Ty$5hshY
+
+# clodenary setup
+CLOUDINARY_CLOUD_NAME=djg3hv9gl
+CLOUDINARY_API_KEY=687321141657826
+CLOUDINARY_API_SECRET=URMmTZhVjDVevQ8PzjSE3uFVYKE -->
+
+  <script>
+    const orderForm = document.getElementById('orderForm');
+    const ordersContainer = document.getElementById('orders');
+
+    // Fetch orders of a user
+    async function getUserOrders(userId) {
+      const response = await fetch(`http://localhost:5000/api/orders/${userId}`);
+      const data = await response.json();
+
+      if (data.orders) {
+        const ordersHtml = data.orders.map(order => `
+          <div class="order-item">
+            <h3>Order ID: ${order._id}</h3>
+            <p><strong>Status:</strong> ${order.status}</p>
+            <p><strong>Total Price:</strong> $${order.totalPrice}</p>
+            <p><strong>Order Date:</strong> ${new Date(order.orderDate).toLocaleString()}</p>
+            <p><strong>Products:</strong> ${order.products.map(product => product.name).join(', ')}</p>
+          </div>
+        `).join('');
+        ordersContainer.innerHTML = ordersHtml;
+      } else {
+        ordersContainer.innerHTML = '<p>No orders found for this user.</p>';
+      }
+    }
+
+    // Handle order form submission
+    orderForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const user = document.getElementById('user').value;
+      const products = document.getElementById('products').value.split(',').map(id => id.trim());
+      
+      const orderData = { user, products };
+
+      const response = await fetch('http://localhost:5000/api/orders/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      const result = await response.json();
+
+      if (result.order) {
+        alert('Order created successfully!');
+        getUserOrders(user); // Reload orders
+      } else {
+        alert('Error creating order!');
+      }
+    });
+
+    // Get orders for a specific user (example userId 'USER_ID')
+    getUserOrders('USER_ID');
+  </script>
 
 </body>
 </html>
+
