@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config()
 const PORT = process.env.PORT;
 const routes = require("./routes/crud.js");
 const userRoutes = require("./routes/users.routes.js");
+const productRoutes = require("./routes/products.js");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -21,6 +22,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(routes)
 // user Routes
 app.use(userRoutes)
+// product
+app.use(productRoutes)
 
 
 connectDB()

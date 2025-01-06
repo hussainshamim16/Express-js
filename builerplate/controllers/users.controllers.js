@@ -21,11 +21,11 @@ const registerUser = async (req, res) => {
 
     const { username, email, password, role } = req.body;
 
-    // Step 1: Create dummy product
-    const product = await Product.create({ name: "Test Product", price: 100 });
+    // // Step 1: Create dummy product
+    // const product = await Product.create({ name: "Test Product", price: 100 });
 
     // Step 2: Create dummy order and associate it with the product
-    const order = await Order.create({ total: 100, items: [product._id] });
+    // const order = await Order.create({ total: 100, items: [product._id] });
 
 
     if (!email) return res.status(400).json({ message: "email required" });
@@ -39,8 +39,8 @@ const registerUser = async (req, res) => {
         password,
         username,
         role,
-        products: [product._id],
-        orders: [order._id],
+        products: [Product._id],
+        orders: [Order._id],
     });
     res.json({ message: "user registered successfully", data: createUser });
 };
