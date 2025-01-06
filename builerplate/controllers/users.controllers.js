@@ -1,4 +1,6 @@
-const User = require("../models/users.models");
+const User = require("../models/user");
+const Product = require("../models/product");
+const Order = require("../models/order");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -15,9 +17,16 @@ const generateRefreshToken = (user) => {
 };
 
 // register user
-
 const registerUser = async (req, res) => {
-    const { email, password } = req.body;
+
+    const { username, email, password, role } = req.body;
+
+    // Step 1: Create dummy product
+    const product = await Product.create({ name: "Test Product", price: 100 });
+
+    // Step 2: Create dummy order and associate it with the product
+    const order = await Order.create({ total: 100, items: [product._id] });
+
 
     if (!email) return res.status(400).json({ message: "email required" });
     if (!password) return res.status(400).json({ message: "password required" });
@@ -28,12 +37,15 @@ const registerUser = async (req, res) => {
     const createUser = await User.create({
         email,
         password,
+        username,
+        role,
+        products: [product._id],
+        orders: [order._id],
     });
     res.json({ message: "user registered successfully", data: createUser });
 };
 
 // login user
-
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
