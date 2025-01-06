@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config()
 const PORT = process.env.PORT;
 const routes = require("./routes/crud.js");
 const userRoutes = require("./routes/users.routes.js");
+const OrderRoutes = require("./routes/orders.js");
 const productRoutes = require("./routes/products.js");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -24,6 +25,8 @@ app.use(routes)
 app.use(userRoutes)
 // product
 app.use(productRoutes)
+// Order
+app.use(OrderRoutes)
 
 
 connectDB()
